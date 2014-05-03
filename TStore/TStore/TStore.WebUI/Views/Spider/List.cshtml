@@ -1,0 +1,16 @@
+﻿@model TStore.WebUI.Models.SpidersListViewModel
+
+@{
+    ViewBag.Title = "Spiders";
+}
+
+
+@foreach (var s in Model.Spiders)
+{
+    Html.RenderPartial("SpiderSummary", s);
+}
+<div class ="pager">
+
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new{ page = x, sex = Model.CurrentCategory}))
+
+</div>

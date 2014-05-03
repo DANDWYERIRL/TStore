@@ -1,0 +1,27 @@
+﻿@model TStore.Domain.Entities.Spider
+
+<div class="spider">
+    
+    @if (Model.ImageData != null) {
+    <div style="float:left;margin-right:20px; padding-right:0px;">
+        <img width="200" height="200" src="@Url.Action("GetImage", "Spider",
+        new{ Model.SpiderId})" />
+        </div>
+    }
+          
+    <h3>@Model.CommonName</h3>
+    <h4><i>@Model.LatinName</i></h4>
+    <p><b>@Model.Size @Model.Sex</b></p>
+    <p align="justify">@Model.Description</p>
+  
+
+    @using (Html.BeginForm("AddToCart", "Cart")) { 
+    @Html.HiddenFor(x => x.SpiderId)
+    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+        <input class="actionButtons" type="submit" value="+ Add to cart" />
+    }
+
+    <h4>@Model.Price.ToString("c")</h4>  
+
+    <hr />
+</div>

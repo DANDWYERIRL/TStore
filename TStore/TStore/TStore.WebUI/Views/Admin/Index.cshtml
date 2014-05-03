@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TStore.Domain.Entities.Spider>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>All Spiders</h2>
+<table class="Grid">
+    <tr>
+        <th>ID</th>
+        <th>Common Name</th>     
+        <th>Latin Name</th>
+        <th>Sex</th>
+        <th>Size</th>
+        <th class="NumerCol">Price</th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var t in Model) {
+    <tr>
+       <td>@t.SpiderId</td>
+        <td>@Html.ActionLink(t.CommonName, "Edit", new {@t.SpiderId})</td>
+        <td>@t.LatinName</td>
+        <td>@t.Sex</td>
+        <td>@t.Size</td>
+        <td class="NumericCol">@t.Price.ToString("c")</td>
+        <td>
+            @using (Html.BeginForm("Delete", "Admin")) { 
+                @Html.Hidden("SpiderId", t.SpiderId)
+            <input type="submit" value="Delete" />
+            }
+
+        </td>
+    </tr>
+}
+
+</table>
+<p>@Html.ActionLink("Add a new product", "Create")</p>
